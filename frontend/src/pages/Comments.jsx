@@ -52,9 +52,6 @@ function Comments () {
         }
         if(id) fetchComments(`${fetchByVideoId}/${id}`);
     },[])
-    if(!id){
-        return "Error no video id given"
-    }
     return(
         <div>
             <h1>Comments</h1>
