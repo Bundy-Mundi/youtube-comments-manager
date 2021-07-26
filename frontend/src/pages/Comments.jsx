@@ -1,5 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+
+const fetchByVideoId = "http://localhost:3000/comments/of-video";
 
 const LoadReply = ({replies}) => {
     return (
@@ -38,17 +41,20 @@ const CommentBlock = ({
 }
 
 function Comments () {
+    let { id } = useParams();
     const [commentData, setCommentData] = useState([]);
+    
     useEffect(()=>{
         async function fetchComments (url) {
-            const {data} = await axios.get(url).catch(err => console.log(err));
-            if(data.items){
-                console.log(data.items[0], data.items[1], data.items[2])
-                setCommentData(data.items)
-            }
+            const res = await axios.get(url).catch(err => console.log(err));
+            if(!res) throw new Error("Bad request");
+            setCommentData(res.data.items)
         }
-        fetchComments("http://localhost:3000/comments/of-video/ib0Ekm5Mutg");
+        if(id) fetchComments(`${fetchByVideoId}/${id}`);
     },[])
+    if(!id){
+        return "Error no video id given"
+    }
     return(
         <div>
             <h1>Comments</h1>

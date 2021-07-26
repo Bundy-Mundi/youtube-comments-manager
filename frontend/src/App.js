@@ -6,6 +6,7 @@ import {
 import Comments from "./pages/Comments";
 import Home from "./pages/Home";
 import Nav from "./components/Nav";
+import Error404 from "./components/404";
 function App() {
   return (
     <Router>
@@ -14,8 +15,11 @@ function App() {
         <Route exact path="/">
           <Home/>
         </Route>
-        <Route path="/comments">
+        <Route path="/comments/:id">
           <Comments/>
+        </Route>
+        <Route>
+          <Error404/>
         </Route>
       </Switch>
     </Router>
