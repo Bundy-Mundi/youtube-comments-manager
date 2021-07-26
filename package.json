@@ -1,5 +1,19 @@
 {
-  "dependencies": {
-    "@types/axios": "^0.14.0"
-  }
+  "name": "youtube-api",
+  "version": "1.0.0",
+  "description": "- YouTube comments system is a little bit hard to find and manage. Especially when you want to re-visit the comment that you wrote.\r - The Goal is to make comments to be more visible and intuitive using YouTube APIs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bundy-Mundi/youtube-comments-manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bundy-Mundi/youtube-comments-manager/issues"
+  },
+  "homepage": "https://github.com/Bundy-Mundi/youtube-comments-manager#readme"
 }
