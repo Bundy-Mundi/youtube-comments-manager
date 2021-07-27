@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 const fetchByVideoId = "http://localhost:3000/comments/of-video";
 
 const LoadReply = ({replies}) => {
+    
     return (
         replies.map((v, k)=>{
             return <p style={{fontSize:"0.6rem", fontWeight:"bold"}} key={k}>{v.snippet.textOriginal}</p>
@@ -13,7 +14,17 @@ const LoadReply = ({replies}) => {
 }
 
 const ReplyButton = ({replies}) => {
-    return <button >Replies</button>
+    const [flag, setflag] = useState(false);
+    return (<>
+        <button onClick={()=>setflag(!flag)}>Replies</button>
+        <div>{
+            flag ?
+                LoadReply({replies})
+                    :
+                null
+            }  
+        </div>
+    </>)
 }
 
 const CommentBlock = ({
