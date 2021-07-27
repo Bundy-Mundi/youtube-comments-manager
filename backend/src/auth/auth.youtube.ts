@@ -16,7 +16,6 @@ export class YouTubeStrategy extends PassportStrategy(Strategy, 'youtube'){
       }
     async validate (access_token:string, refresh_token:string, profile:any, done): Promise<any> {
         const { id, displayName:username } = profile;
-        
         const payload = {
             access_token,
             refresh_token,
