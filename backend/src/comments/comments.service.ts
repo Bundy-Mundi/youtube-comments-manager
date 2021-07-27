@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { Body, Injectable } from '@nestjs/common';
+import { BadRequestException, Body, Injectable } from '@nestjs/common';
 import { map } from 'rxjs';
 require("dotenv").config();
 
@@ -15,5 +15,7 @@ export class CommentsService {
     }
     getCommentsOfVideo(url:string){
         return this.httpService.get(url).pipe(map(res => res.data));
+    }
+    getMyCommentsOfVideo(url:string){
     }
 }

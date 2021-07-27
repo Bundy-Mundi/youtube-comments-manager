@@ -1,11 +1,12 @@
 import { Injectable } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
 import { PassportStrategy } from "@nestjs/passport";
 import { Strategy } from "passport-youtube-v3";
 require('dotenv').config();
 
 @Injectable()
 export class YouTubeStrategy extends PassportStrategy(Strategy, 'youtube'){
-    constructor() {
+    constructor(private jwtService: JwtService ) {
         super({
             clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
             clientSecret: process.env.GOOGLE_OAUTH_SECRET,
@@ -13,12 +14,15 @@ export class YouTubeStrategy extends PassportStrategy(Strategy, 'youtube'){
             scope:['https://www.googleapis.com/auth/youtube.force-ssl']
         });
       }
-    async validate (access_token, refresh_token, profile, done): Promise<any> {
-        const user = {
+    async validate (access_token:string, refresh_token:string, profile:any, done): Promise<any> {
+        const { id, displayName:username } = profile;
+        
+        const payload = {
             access_token,
-            profile,
-            refresh_token
+            refresh_token,
+            id,
+            username
         }
-        done(null, user);
+        done(null, {token:this.jwtService.sign(payload)});
     } 
 }

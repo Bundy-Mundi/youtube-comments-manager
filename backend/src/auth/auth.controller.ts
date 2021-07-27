@@ -17,9 +17,7 @@ export class AuthController {
 
     @UseGuards(AuthGuard('youtube'))
     @Get("/youtube")
-    authYouTube(@Req() req){
-        console.log(req);
-    }
+    authYouTube(@Req() req){}
 
     @UseGuards(AuthGuard('youtube'))
     @Get("/youtube/redirect")
@@ -32,5 +30,11 @@ export class AuthController {
                 "parentId":"UgwDjGR0maoSo_gsXQh4AaABAg"
             }
         } */
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Get("/jwt")
+    verifyJwt(@Req() req){
+        return req.user;
     }
 }
