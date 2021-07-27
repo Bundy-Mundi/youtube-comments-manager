@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams, useHistory } from "react-router-dom";
 
-const fetchByVideoId = "http://localhost:3000/comments/of-video";
+const fetchByVideoIdURL = "http://localhost:3000/comments/of-video";
 
 const LoadReply = ({replies}) => {
     
@@ -22,7 +22,7 @@ const ReplyButton = ({replies}) => {
                 LoadReply({replies})
                     :
                 null
-            }  
+            }
         </div>
     </>)
 }
@@ -51,19 +51,21 @@ const CommentBlock = ({
             </div>)
 }
 
-function Comments () {
+function CommentsList () {
     let { id } = useParams();
+    let history = useHistory();
     const [commentData, setCommentData] = useState([]);
     
     useEffect(()=>{
         async function fetchComments (url) {
             const res = await axios.get(url).catch(err => console.log(err));
-            if(!res) throw new Error("Bad request");
-            setCommentData(res.data.items)
+            if(!res) history.replace("/404?error=Invalid%20video%20ID%20is%20given")
+            else setCommentData(res.data.items);
         }
-        if(id) fetchComments(`${fetchByVideoId}/${id}`);
+        if(id) fetchComments(`${fetchByVideoIdURL}/${id}`);
     },[])
     return(
+        <>
         <div>
             <h1>Comments</h1>
             {
@@ -82,7 +84,8 @@ function Comments () {
                 )
             }
         </div>
+        </>
     )
 };
 
-export default Comments;
+export default CommentsList;
