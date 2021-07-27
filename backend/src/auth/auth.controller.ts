@@ -1,5 +1,6 @@
 import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { JwtGuard } from './guards/guards.jwt';
+import { YouTubeGuard } from './guards/guards.youtube';
 
 @Controller('auth')
 export class AuthController {
@@ -15,24 +16,17 @@ export class AuthController {
         return req.user
     } */
 
-    @UseGuards(AuthGuard('youtube'))
+    @UseGuards(YouTubeGuard)
     @Get("/youtube")
     authYouTube(@Req() req){}
 
-    @UseGuards(AuthGuard('youtube'))
+    @UseGuards(YouTubeGuard)
     @Get("/youtube/redirect")
     authYouTubeRedirect(@Req() req){
         return req.user;
-        /* Now POST https://www.googleapis.com/youtube/v3/comments?part=snippet */
-        /* {
-            "snippet":{
-                "textOriginal":"Test",
-                "parentId":"UgwDjGR0maoSo_gsXQh4AaABAg"
-            }
-        } */
     }
 
-    @UseGuards(AuthGuard('jwt'))
+    @UseGuards(JwtGuard)
     @Get("/jwt")
     verifyJwt(@Req() req){
         return req.user;

@@ -1,5 +1,5 @@
 import { BadRequestException, Controller, Get, Param, UseGuards } from '@nestjs/common';
-import { AuthGuard } from './comments.auth.guard';
+import { JwtGuard } from 'src/auth/guards/guards.jwt';
 import { CommentsService } from './comments.service';
 import { getCommentThreadsUrl, getCommentUrl, getCommentWithRepliesUrl, getMyCommentThreadsUrl } from './comments.utils';
 
@@ -30,7 +30,7 @@ export class CommentController {
         return this.commentService.getCommentsOfVideo(url);
     }
 
-    @UseGuards(new AuthGuard())
+    @UseGuards(JwtGuard)
     @Get('of-video/:id/mine')
     getMyCommentsOfVideo(@Param('id') id:string){
         const url = getMyCommentThreadsUrl(id, "relevance", process.env.APIKEY);
