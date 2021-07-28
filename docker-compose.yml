@@ -1,0 +1,25 @@
+version: "3"
+services:
+    frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        volumes:
+            - /usr/share/app/node_modules
+            - ./frontend:/usr/share/app
+        stdin_open: true
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        volumes:
+            - /usr/share/app/node_modules
+            - ./backend:/usr/share/app
+    nginx:
+        restart: always
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+    

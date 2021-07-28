@@ -1,6 +1,5 @@
 import axios from "axios";
-//import findMyComments from "./findMyComments";
-const fetchByVideoIdURL = "http://localhost:3000/comments/of-video";
+const fetchByVideoIdURL = "/api/comments/of-video";
 
 const fetchComments = async ({id, history, setCommentData}) => {
     let url = `${fetchByVideoIdURL}/${id}`;
