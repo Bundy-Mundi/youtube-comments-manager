@@ -6,7 +6,7 @@
 
 #### Step #1 
 
-> Install `docker` from the official website => [Installation Guide](https://docs.docker.com/get-docker/)
+Install `docker` from the official website => [Installation Guide](https://docs.docker.com/get-docker/)
 
 #### Step #2
 
@@ -20,11 +20,11 @@ docker-compose up
 
 #### Step #3 
 
-> Hit `http://localhost` | `http://localhost:80` on your browser
+Hit `http://localhost` | `http://localhost:80` on your browser
 
 #### Step #4
 
-> Happy hack!
+Happy hack!
 
 ### 2. Manually
 
