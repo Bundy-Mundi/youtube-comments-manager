@@ -4,7 +4,9 @@
   "description": "- YouTube comments system is a little bit hard to find and manage. Especially when you want to re-visit the comment that you wrote.\r - The Goal is to make comments to be more visible and intuitive using YouTube APIs.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:backend": "cd backend && npm run start:dev",
+    "dev:frontend": "cd frontend && yarn dev:window",
+    "dev": "npm run dev:backend && npm run dev:frontend "
   },
   "repository": {
     "type": "git",

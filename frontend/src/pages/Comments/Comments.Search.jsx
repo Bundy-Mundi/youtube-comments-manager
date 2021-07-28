@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { useHistory } from "react-router-dom";
 import queryString from "query-string";
-import fetchCommentsAndMyComments from "../../utils/fetchComments";
 import fetchComments from "../../utils/fetchComments";
 
 
@@ -23,9 +22,9 @@ export const parseUrltoId = (url) => {
     return v;
 }
 
-const CommentsSearch = ({setLoading, setCommentData, setMyCommentData }) => {
+const CommentsSearch = ({setLoading, setCommentData }) => {
     let history = useHistory();
-    let myChannelId = "UC11_a61RtVMhbFSlp35zTbQ"; // Temp
+    // let myChannelId = "UC11_a61RtVMhbFSlp35zTbQ"; // Temp
     const [error, setError] = useState("");
     const [searchUrl, setSearchUrl] = useState("");
 
