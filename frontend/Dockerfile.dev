@@ -1,0 +1,14 @@
+FROM node:14.17.3-alpine
+
+ARG PORT=3001
+ENV PORT=${PORT}
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . . 
+
+CMD ["npm", "run", "start"]

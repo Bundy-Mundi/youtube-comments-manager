@@ -15,6 +15,10 @@ export class AuthController {
     redirect(@Req() req){
         return req.user
     } */
+    @Get()
+    alive(){
+        return "Auth API is alive";
+    }
 
     @UseGuards(YouTubeGuard)
     @Get("/youtube")
