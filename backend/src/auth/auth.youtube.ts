@@ -10,7 +10,7 @@ export class YouTubeStrategy extends PassportStrategy(Strategy, 'youtube'){
         super({
             clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
             clientSecret: process.env.GOOGLE_OAUTH_SECRET,
-            callbackURL: "http://localhost:3000/auth/youtube/redirect",
+            callbackURL: "http://localhost/api/v1/auth/youtube/redirect",
             scope:['https://www.googleapis.com/auth/youtube.force-ssl']
         });
       }
