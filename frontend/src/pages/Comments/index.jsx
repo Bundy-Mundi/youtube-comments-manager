@@ -10,7 +10,6 @@ const Comments = () => {
     let { id } = useParams();
     let history = useHistory();
     const [commentData, setCommentData] = useState([]);
-    
     const [loading, setLoading] = useState("");
     useEffect(()=>{
         if(id) {
