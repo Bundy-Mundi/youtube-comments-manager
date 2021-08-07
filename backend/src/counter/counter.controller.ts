@@ -1,28 +1,29 @@
-import { CACHE_MANAGER, Controller, Get, Inject } from '@nestjs/common';
-import { Cache } from 'cache-manager';
+import { Controller, Get, Query } from '@nestjs/common';
+import { RedisService } from 'src/redis/redis.service';
 
 @Controller('counter')
 export class CounterController {
-    constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache){}
+    constructor(private readonly redis: RedisService){}
 
     @Get()
-    async getCount(){
-        const count = await this.cacheManager.get('count');
-        if(!count) this.cacheManager.set('count', 0);
-        return {count};
+    async getCount(@Query("key") key){
+        return { count: await this.redis.get(key)};
     }
     @Get("inc")
-    async incCount(){
-        const count:number = parseInt(await this.cacheManager.get('count'));
-        if(!count) return {error: "Cannot get count"}
-        this.cacheManager.set("count", count + 1);
-        return {error:null, count};
+    async incCount(@Query("key") key){
+        const count = parseInt(await this.redis.get(key));
+        await this.redis.set(key, count + 1);
+        return {count: await this.redis.get(key)}
     }
     @Get("dec")
-    async decCount(){
-        const count:number = parseInt(await this.cacheManager.get('count'));
-        if(!count) return {error: "Cannot get count"}
-        this.cacheManager.set("count", (count - 1) < 0 ? (count - 1) : 0);
-        return {error:null, count};
+    async decCount(@Query("key") key){
+        const count = parseInt(await this.redis.get(key));
+        await this.redis.set(key, count - 1);
+        return {count: await this.redis.get(key)}
+    }
+    @Get("del")
+    async delCount(@Query("key") key){
+        const success = await this.redis.del(key);
+        return {success:(success === 1)}
     }
 }
