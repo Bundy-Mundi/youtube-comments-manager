@@ -1,3 +1,6 @@
+# Node
+
+## Development
 FROM node:12.13-alpine As development
 
 WORKDIR /usr/src/app
@@ -10,6 +13,7 @@ COPY . .
 
 RUN npm run build
 
+## Production
 FROM node:12.13-alpine as production
 
 ARG NODE_ENV=production
@@ -26,3 +30,4 @@ COPY . .
 COPY --from=development /usr/src/app/dist ./dist
 
 CMD ["node", "dist/main"]
+

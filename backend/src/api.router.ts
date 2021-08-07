@@ -3,8 +3,9 @@ import { RouterModule } from "@nestjs/core";
 import { AppModule } from "./app/app.module";
 import { AuthModule } from "./auth/auth.module";
 import { CommentsModule } from "./comments/comments.module";
+import { CounterModule } from "./counter/counter.module";
 
-let ALL_V1_MODULES = [AppModule, AuthModule, CommentsModule];
+let ALL_V1_MODULES = [AppModule, AuthModule, CommentsModule, CounterModule];
 let ALL_V2_MODULES = [];
 @Module({
     imports: [
