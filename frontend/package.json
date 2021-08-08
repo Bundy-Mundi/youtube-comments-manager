@@ -16,12 +16,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "dev:window": "set PORT=3001 && react-scripts start",
-    "build:window": "set PORT=3001 && react-scripts build",
-    "start": "react-scripts start",
-    "prebuild": "PORT=3001",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
