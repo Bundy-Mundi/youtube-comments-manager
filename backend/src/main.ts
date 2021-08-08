@@ -4,7 +4,7 @@ import { ApiRouterModule } from './api.router';
 import * as cookieParser from 'cookie-parser';
 require("dotenv").config();
 //import { AppModule } from './app/app.module';
-const PORT = process.env.NODE_ENV === 'development' ? 80 : 3000;
+const PORT = process.env.NODE_ENV === 'development' ? 4000 : 4000;
 async function bootstrap() {
   const app = await NestFactory.create(ApiRouterModule);
   app.enableCors();
