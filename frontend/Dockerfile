@@ -1,5 +1,4 @@
 # React
-
 FROM node:14.17.3-alpine as builder
 WORKDIR /usr/src/app
 COPY package*.json ./
@@ -8,7 +7,6 @@ COPY . .
 CMD npm run build
 
 # Nginx
-
 FROM nginx
 EXPOSE 3001
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
