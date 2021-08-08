@@ -15,11 +15,9 @@ function App() {
         <Route exact path="/">
           <Home/>
         </Route>
-        {/*
         <Route path="/comments">
           <Comments/>
         </Route>
-        */ }
         <Route>
           <Error404/>
         </Route>
