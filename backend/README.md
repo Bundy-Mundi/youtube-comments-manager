@@ -23,9 +23,15 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 
+## Things to do
+
+- [ ] Make a guard check if there is a key in Redis. Key must be user id, email or anything unique.
+
+
 ## Google OAuth 2.0
 
   [Guide](https://dev.to/imichaelowolabi/how-to-implement-login-with-google-in-nest-js-2aoa)
+
 
 ## License
 
