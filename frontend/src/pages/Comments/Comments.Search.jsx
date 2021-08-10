@@ -22,9 +22,8 @@ export const parseUrltoId = (url) => {
     return v;
 }
 
-const CommentsSearch = ({setLoading, setCommentData }) => {
+const CommentsSearch = ({ setCommentData, pages, setPages }) => {
     let history = useHistory();
-    // let myChannelId = "UC11_a61RtVMhbFSlp35zTbQ"; // Temp
     const [error, setError] = useState("");
     const [searchUrl, setSearchUrl] = useState("");
 
@@ -32,7 +31,7 @@ const CommentsSearch = ({setLoading, setCommentData }) => {
         const id = parseUrltoId(url);
         const isError = updateError(id, setError);
         if(!isError) {
-            fetchComments({id, history, setCommentData });
+            fetchComments({id, history, setCommentData, pages, setPages });
             setSearchUrl("");
         }
     }
@@ -41,24 +40,32 @@ const CommentsSearch = ({setLoading, setCommentData }) => {
             const id = parseUrltoId(url);
             const isError = updateError(id, setError);
             if(!isError) {
-                fetchComments({id, history, setCommentData});
+                fetchComments({id, history, setCommentData, setPages});
                 setSearchUrl("");
             }
         }
     }
     
     return (
-        <>
-        <div>
-            {
-                error ?? null
-            }
+        <div className="w-full h-24 flex flex-col justify-center items-center rounded-lg overflow-hidden border bg-white">
+            <div className="text-red-500 text-sm font-bold">
+                {
+                    error ?? null
+                }
+            </div>
+            <div className="h-full w-full flex justify-center items-center">
+                <input 
+                    className="w-3/4 lg:w-1/2 xl:w-1/2 2xl:w-1/2 h-12 border-2 border-red-500 rounded-l-lg p-2 focus:outline-none focus:border-opacity-60"
+                    onKeyDown ={e => handleOnKeyPress(e, searchUrl)} 
+                    value={searchUrl} 
+                    onChange={e => setSearchUrl(e.target.value)} 
+                    type="text" 
+                    placeholder="Please type the proper url of the video"/>
+                <button
+                 className="h-12 w-24 uppercase text-sm font-bold rounded-r-lg border-2 border-black hover:bg-black hover:text-white"
+                 onClick={()=>handleOnClick(searchUrl)}>Search</button>
+            </div>
         </div>
-        <div>
-            <input onKeyDown ={e => handleOnKeyPress(e, searchUrl)} value={searchUrl} onChange={e => setSearchUrl(e.target.value)} type="text" placeholder="Please type the proper url of the video"/>
-            <button onClick={()=>handleOnClick(searchUrl)}>Search</button>
-        </div>
-        </>
     )
 }
 

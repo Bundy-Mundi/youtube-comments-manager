@@ -1,47 +1,61 @@
+import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route 
 } from "react-router-dom";
-import Home from "./pages/Home";
+import axios from "axios";
 import Nav from "./components/Nav";
-import Error404 from "./components/404";
+import Home from "./pages/Home";
 import Comments from "./pages/Comments/index";
 import Login from "./pages/Login";
-import LayoutDefault from "./components/layouts/Layout.Default";
-import LayoutAuth from "./components/layouts/Layout.Auth";
-import { useState } from "react";
+import Error404 from "./components/404";
+import Error403 from "./components/403";
+
+
 
 function App() {
-  const [auth, setAuth] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  useEffect(async()=>{
+    const token = localStorage.getItem('token');
+    if(token) {
+      const { data } = await fetchAuth(token);
+      if(data){
+        setIsAuthenticated(true)
+      }
+    }
+  }, []);
+  const fetchAuth = async(token) => {
+    let url = (process.env.NODE_ENV==='development') ? "http://localhost:4000/api/v1/auth/jwt" : "/api/v1/auth/jwt"
+    return await axios.get(url, {headers:{"Authorization": `Bearer ${token}`}}).catch(err => console.log(err));
+  };
   return (
     <Router>
-      <Nav auth={auth} setAuth={setAuth}/>
+      <Nav auth={isAuthenticated} setAuth={setIsAuthenticated}/>
       <Switch>
         {
-          auth ? 
-          <>
-          <Route exact path="/">
-            <LayoutDefault>
-              <Home/>
-            </LayoutDefault>
-          </Route>
-          <Route path="/comments">
-            <Comments/>
-          </Route>
-          </>
+          isAuthenticated ?
+          <Route exact path="/" component={Home}/>
             :
-          <>
-          <Route exact path="/">
-            <LayoutAuth>
-              <Login/>
-            </LayoutAuth>
-          </Route>
-          </>
+          <Route exact path="/" component={Login}/>
         }
-        <Route>
-          <Error404/>
-        </Route>
+        <>
+        <Route 
+          exact
+          path="/comments"
+          render={()=><Comments isAuthenticated={isAuthenticated}/>}
+        />
+        <Route exact path='/errors/403' component={Error403}/>
+        <Route exact path='/errors/404' component={Error404}/>
+        {/* 
+          Default Redirection to 404 page }
+          <Redirect
+            exact
+            from='*' 
+            to='/errors/404'
+          /> 
+        */}
+        </>
       </Switch>
     </Router>
   );
