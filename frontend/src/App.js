@@ -12,23 +12,23 @@ import Login from "./pages/Login";
 import Error404 from "./components/404";
 import Error403 from "./components/403";
 
-
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  useEffect(async()=>{
+  useEffect(()=>{
+    const fetchAuth = async(token) => {
+      let url = (process.env.NODE_ENV==='development') ? "http://localhost:4000/api/v1/auth/jwt" : "/api/v1/auth/jwt"
+      return await axios.get(url, {headers:{"Authorization": `Bearer ${token}`}}).catch(err => console.log(err));
+    };
     const token = localStorage.getItem('token');
     if(token) {
-      const { data } = await fetchAuth(token);
-      if(data){
-        setIsAuthenticated(true)
+      const res = fetchAuth(token);
+      if(res){
+        if(res.data) setIsAuthenticated(true);
+        else setIsAuthenticated(false);
       }
     }
   }, []);
-  const fetchAuth = async(token) => {
-    let url = (process.env.NODE_ENV==='development') ? "http://localhost:4000/api/v1/auth/jwt" : "/api/v1/auth/jwt"
-    return await axios.get(url, {headers:{"Authorization": `Bearer ${token}`}}).catch(err => console.log(err));
-  };
+
   return (
     <Router>
       <Nav auth={isAuthenticated} setAuth={setIsAuthenticated}/>

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { NavLink } from "react-router-dom";
 
 const listClass = "mr-3";
-const R_MenuList = ({to, text, onClick}) => {
+const ResposiveMenuList = ({to, text, onClick}) => {
     return (
     <li onClick={onClick} className="w-full h-24 flex items-center justify-start text-2xl hover:bg-gray-100">
         <NavLink className="w-full h-full flex items-center justify-start pl-4 ml-24 " to={to} >
@@ -44,18 +44,18 @@ const Nav = ({ auth, setAuth }) => {
                         <li onClick={()=>setMenuopen(!menuopen)} className="w-full h-24 flex items-center justify-end hover:bg-gray-100">
                             <span className="h-10 w-10 text-3xl cursor-pointer font-bold">X</span>
                         </li>
-                        <R_MenuList onClick={()=>setMenuopen(!menuopen)} to="/" text="Home"/>
+                        <ResposiveMenuList onClick={()=>setMenuopen(!menuopen)} to="/" text="Home"/>
                         {
                             auth ?
                             <>
-                                <R_MenuList onClick={()=>setMenuopen(!menuopen)} to="/comments" text="Comments"/>
+                                <ResposiveMenuList onClick={()=>setMenuopen(!menuopen)} to="/comments" text="Comments"/>
                             </>
                                 :
                             null
                         }
                     </ul>
                 </div>
-                    :
+                :
                 null
             }
         </>

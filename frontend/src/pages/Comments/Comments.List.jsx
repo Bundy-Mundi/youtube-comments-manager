@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import findMyComments from "../../utils/findMyComments";
 
 const commentStyle = "text-4xl mb-3";
 
@@ -35,7 +34,7 @@ const CommentBlock = ({
     updatedAt}) => {
     return (
             <div className="p-4 mb-3 rounded-lg border bg-white overflow-hidden">
-                <a className="mb-2" href={authorChannelUrl} target="_blank">
+                <a className="mb-2" href={authorChannelUrl} target="_blank" rel="noreferrer">
                     <div className="flex items-center justify-between">
                         <p className="mb-2 text-3xl">{authorDisplayName}</p>
                         <p className="mb-2 text-sm">Updated At: {updatedAt}</p>
@@ -60,7 +59,7 @@ const CommentBlock = ({
 function CommentsList ({ commentData, myChannelId }) {
     const [myCommentData, setMyCommentData] = useState([]);
     useEffect(()=>{
-        findMyComments({commentData, myChannelId, setMyCommentData});
+        //findMyComments({commentData, myChannelId, setMyCommentData});
     },[commentData]);
     return(
         <div className="flex flex-col items-start justify-center w-full border rounded-lg bg-white p-6">

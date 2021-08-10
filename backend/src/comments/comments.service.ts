@@ -17,11 +17,13 @@ export class CommentsService {
         let url:string = getCommentThreadsUrl(id, "relevance", process.env.APIKEY);
         if(!pages) return this.httpService.get(url).pipe(map(res => res.data));
         
-        for (let index = 1; index <= pages; index++) {
+        /*for (let index = 1; index <= pages; index++) {
             const res = this.httpService.get(url).pipe(map(res => res.data));
-            res.pipe(map(res => console.log(res.nextPageToken)))
-        }
-        
+            res.pipe(map(res => {
+                console.log(res.nextPageToken)
+            }))
+        }*/
+
     }
     getMyCommentsOfVideo(url:string){
         //return this.httpService.get(url)
