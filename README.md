@@ -4,6 +4,10 @@
 
 - To build successfully interacting full-stack web application using Docker.
 
+## Structure
+
+![](https://git-static.s3.ap-northeast-2.amazonaws.com/0001.jpg)
+
 ## Stacks
 
 - Frontend: Create React App (CRA)
