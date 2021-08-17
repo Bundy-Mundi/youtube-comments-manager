@@ -12,13 +12,12 @@ const ResposiveMenuList = ({to, text, onClick}) => {
     )
 }
 
-const Nav = ({ auth, setAuth }) => {
+const Nav = ({ auth }) => {
     const [ menuopen, setMenuopen ] = useState(false);
     return (
         <>
         <nav className="w-full sticky top-0 z-50 p-6 flex items-center justify-start shadow-lg bg-white bg-opacity-80">
             <ul className="hidden flex-row items-center md:flex lg:flex xl:flex 2xl:flex">
-                <li className="cursor-pointer font-bold text-sm mr-3" onClick={()=>setAuth(!auth)}>Authenticate</li>
                 <li className={listClass}><NavLink to="/">Home</NavLink></li>
                 {
                     auth ?

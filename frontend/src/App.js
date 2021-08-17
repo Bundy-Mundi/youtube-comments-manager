@@ -31,7 +31,7 @@ function App() {
 
   return (
     <Router>
-      <Nav auth={isAuthenticated} setAuth={setIsAuthenticated}/>
+      <Nav auth={isAuthenticated}/>
       <Switch>
         {
           isAuthenticated ?
