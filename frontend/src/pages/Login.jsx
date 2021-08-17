@@ -3,6 +3,7 @@ import LayoutAuth from "../components/layouts/Layout.Auth";
 
 function Login () {
     let YOUTUBE_AUTH_URL = process.env.NODE_ENV === "development" ? "http://localhost:4000/api/v1/auth/youtube" : "/api/v1/auth/youtube";
+    console.log(process.env.NODE_ENV);
     return(
         <LayoutAuth>
             <div className="w-64 h-64 flex items-center justify-center">

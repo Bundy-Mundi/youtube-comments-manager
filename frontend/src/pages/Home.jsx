@@ -10,7 +10,6 @@ const lastListStyle = "w-full h-full hover:bg-gray-900 hover:text-white border-2
 function Home () {
     let token = new URLSearchParams(useLocation().search).get("token");
     useEffect(()=>{
-        console.log(process.env.NODE_ENV);
         if(token) localStorage.setItem("token", token);
     },[token]);
     return(
