@@ -8,6 +8,7 @@ services:
         build:
             context: ./frontend
             dockerfile: Dockerfile
+        image: exit21sb/youtube-comments-manager-frontend
         container_name: youtube_frontend
         volumes:
             - /usr/src/app/node_modules
@@ -17,16 +18,19 @@ services:
         build:
             context: ./backend
             dockerfile: Dockerfile
+        image: exit21sb/youtube-comments-manager-backend
         container_name: youtube_backend
         links:
             - redis:redis
         environment:
             - REDIS_URL=redis
+            - NODE_ENV=development
         volumes:
             - /usr/src/app/node_modules
             - ./backend:/usr/src/app
     nginx:
         restart: always
+        image: exit21sb/youtube-comments-manager-nginx
         container_name: youtube_nginx
         build:
             context: ./nginx

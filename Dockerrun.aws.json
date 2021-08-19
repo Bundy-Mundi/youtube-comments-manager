@@ -1,0 +1,40 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+    {
+      "name": "redis",
+      "image": "redis:alpine", 
+      "essential": true,
+      "memory": 128
+    },
+    {
+      "name": "frontend",
+      "image": "exit21sb/youtube-comments-manager-frontend", 
+      "essential": true,
+      "memory": 128
+    },
+    {
+      "name": "backend",
+      "image": "exit21sb/youtube-comments-manager-backend", 
+      "essential": true,
+      "memory": 128,
+      "links": ["redis"]
+    },
+    {
+      "name": "nginx",
+      "image": "exit21sb/youtube-comments-manager-nginx",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 3000,
+          "containerPort": 80
+        }
+      ],
+      "links": ["frontend", "backend", "redis"],
+      "mountPoints": [
+      ]
+    }
+  ]
+}
+  
