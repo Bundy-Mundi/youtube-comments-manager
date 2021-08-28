@@ -26,9 +26,8 @@ export class CommentController {
 
     @Get('of-video/:id')
     getCommentsOfVideo
-    (@Param('id') id:string, 
-    @Optional() @Query('pages', ParseIntPipe) pages?:number){
-        return this.commentService.getCommentsOfVideo(id, pages);
+    (@Param('id') id:string){
+        return this.commentService.getCommentsOfVideo(id);
     }
 
     @UseGuards(JwtGuard)

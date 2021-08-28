@@ -3,11 +3,11 @@ services:
     redis:
         image: redis:alpine
         expose:
-            - 6379
+            - "6379"
     frontend:
         build:
             context: ./frontend
-            dockerfile: Dockerfile
+            dockerfile: ./Dockerfile
         container_name: youtube_frontend
         volumes:
             - /usr/src/app/node_modules
@@ -16,12 +16,14 @@ services:
     backend:
         build:
             context: ./backend
-            dockerfile: Dockerfile
+            dockerfile: ./Dockerfile
         container_name: youtube_backend
         links:
             - redis:redis
         environment:
             - REDIS_URL=redis
+        env_file:
+            - ./backend/.env
         volumes:
             - /usr/src/app/node_modules
             - ./backend:/usr/src/app
@@ -30,6 +32,6 @@ services:
         container_name: youtube_nginx
         build:
             context: ./nginx
-            dockerfile: Dockerfile
+            dockerfile: ./Dockerfile
         ports:
             - "3000:80"

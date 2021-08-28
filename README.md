@@ -29,3 +29,7 @@
 - `/api/v1/comments`
 
 ## License
+
+## Things to do
+
+- Make query optional
