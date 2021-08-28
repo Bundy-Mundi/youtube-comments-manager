@@ -56,10 +56,15 @@ const CommentBlock = ({
         )
 }
 
-function CommentsList ({ commentData, myChannelId }) {
-    const [myCommentData, setMyCommentData] = useState([]);
+function CommentsList ({ commentData }) {
+    let myCommentData = [];
+    // const [myCommentData, setMyCommentData] = useState([]);
     useEffect(()=>{
-        //findMyComments({commentData, myChannelId, setMyCommentData});
+        /* Update myCommentData everytime commentData updates 
+        
+        // CODE HERE ...
+
+        */
     },[commentData]);
     return(
         <div className="flex flex-col items-start justify-center w-full border rounded-lg bg-white p-6">

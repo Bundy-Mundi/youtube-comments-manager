@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import LayoutDefault from "../components/layouts/Layout.Default";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import LayoutDefault from "../components/layouts/Layout.Default";
 
 const firstListStyle = "w-full h-full hover:bg-gray-900 hover:text-white border-2 border-b-0 p-6 rounded-t-lg text-sm font-bold hover:white";
 const listStyle = "w-full h-full hover:bg-gray-900 hover:text-white border-2 border-b-0 p-6 text-sm font-bold";
